@@ -17,15 +17,27 @@
 }
 
 #define kScrollRefreshThreshold         30.0f
-#define kScrollResistanceCoefficient    1 / 500.0f
+#define kScrollResistanceCoefficient    1 / 1000.0f
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
+- (instancetype)init {
+    self = [super init];
     if (self){
-        _animator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
-        _visibleIndexPaths = [NSMutableSet set];
+        [self setup];
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self){
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup {
+    _animator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
+    _visibleIndexPaths = [NSMutableSet set];
 }
 
 - (void)prepareLayout {
