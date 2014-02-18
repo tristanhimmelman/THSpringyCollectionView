@@ -16,14 +16,26 @@
     CGPoint _lastTouchLocation;
 }
 
-#define kScrollRefreshThreshold         30.0f
-#define kScrollResistanceCoefficient    1 / 500.0f
+#define kScrollPaddingRect              100.0f
+#define kScrollRefreshThreshold         50.0f
+#define kScrollResistanceCoefficient    1 / 600.0f
 
+-(void)setup{
+    _animator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
+    _visibleIndexPaths = [NSMutableSet set];
+}
+
+- (id)init {
+    self = [super init];
+    if (self){
+        [self setup];
+    }
+    return self;
+}
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self){
-        _animator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
-        _visibleIndexPaths = [NSMutableSet set];
+        [self setup];
     }
     return self;
 }
@@ -39,8 +51,8 @@
     }
     _lastContentOffset = contentOffset;
 
-    CGFloat padding = 100;
-    CGRect currentRect = CGRectMake(0, contentOffset.y - padding, self.collectionView.frame.size.width, self.collectionView.frame.size.height + 2 * padding);
+    CGFloat padding = kScrollPaddingRect;
+    CGRect currentRect = CGRectMake(0, contentOffset.y - padding, self.collectionView.frame.size.width, self.collectionView.frame.size.height + 3 * padding);
     
     NSArray *itemsInCurrentRect = [super layoutAttributesForElementsInRect:currentRect];
     NSSet *indexPathsInVisibleRect = [NSSet setWithArray:[itemsInCurrentRect valueForKey:@"indexPath"]];
@@ -66,8 +78,8 @@
     [newVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *attribute, NSUInteger idx, BOOL *stop) {
         UIAttachmentBehavior *spring = [[UIAttachmentBehavior alloc] initWithItem:attribute attachedToAnchor:attribute.center];
         spring.length = 0;
-        spring.frequency = 0.7;
-        spring.damping = 0.5;
+        spring.frequency = 1.5;
+        spring.damping = 0.8;
 
         // If our touchLocation is not (0,0), we need to adjust our item's center
         if (_lastScrollDelta != 0) {
@@ -79,6 +91,9 @@
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    CGFloat padding = kScrollPaddingRect;
+    rect.size.height += 3*padding;
+    rect.origin.y -= padding;
     return [_animator itemsInRect:rect];
 }
 
@@ -114,4 +129,8 @@
     item.center = center;
 }
 
+-(void)resetLayout{
+    [_animator removeAllBehaviors];
+    [_visibleIndexPaths removeAllObjects];
+}
 @end
