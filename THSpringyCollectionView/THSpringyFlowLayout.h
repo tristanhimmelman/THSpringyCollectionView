@@ -10,4 +10,5 @@
 
 @interface THSpringyFlowLayout : UICollectionViewFlowLayout
 
+-(void)resetLayout;
 @end
