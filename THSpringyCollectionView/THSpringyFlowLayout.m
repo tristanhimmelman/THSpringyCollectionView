@@ -98,7 +98,10 @@
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [_animator layoutAttributesForCellAtIndexPath:indexPath];
+    id layoutAttributes = [_animator layoutAttributesForCellAtIndexPath:indexPath];
+    if (!layoutAttributes)
+        layoutAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
+    return layoutAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
