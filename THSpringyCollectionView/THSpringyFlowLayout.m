@@ -79,7 +79,7 @@
         UIAttachmentBehavior *spring = [[UIAttachmentBehavior alloc] initWithItem:attribute attachedToAnchor:attribute.center];
         spring.length = 0;
         spring.frequency = 1.5;
-        spring.damping = 0.8;
+        spring.damping = 0.6;
 
         // If our touchLocation is not (0,0), we need to adjust our item's center
         if (_lastScrollDelta != 0) {
@@ -129,8 +129,9 @@
     item.center = center;
 }
 
--(void)resetLayout{
+- (void)resetLayout{
     [_animator removeAllBehaviors];
     [_visibleIndexPaths removeAllObjects];
 }
+
 @end
