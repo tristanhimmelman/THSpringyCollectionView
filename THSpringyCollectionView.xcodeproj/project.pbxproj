@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AC605DC1C7657C60055FE0A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AC605DB1C7657C60055FE0A /* Launch Screen.storyboard */; };
 		6AF383FF17F12EB700B85E87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF383FE17F12EB700B85E87 /* Foundation.framework */; };
 		6AF3840117F12EB700B85E87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF3840017F12EB700B85E87 /* CoreGraphics.framework */; };
 		6AF3840317F12EB700B85E87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF3840217F12EB700B85E87 /* UIKit.framework */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6AC605DB1C7657C60055FE0A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6AF383FB17F12EB700B85E87 /* THSpringyCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = THSpringyCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF383FE17F12EB700B85E87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6AF3840017F12EB700B85E87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +126,7 @@
 				6AF3843417F12EC600B85E87 /* THSpringyFlowLayout.m */,
 				6AF3841617F12EB700B85E87 /* Images.xcassets */,
 				6AF3840517F12EB700B85E87 /* Supporting Files */,
+				6AC605DB1C7657C60055FE0A /* Launch Screen.storyboard */,
 			);
 			path = THSpringyCollectionView;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			files = (
 				6AF3841717F12EB700B85E87 /* Images.xcassets in Resources */,
 				6AF3840917F12EB700B85E87 /* InfoPlist.strings in Resources */,
+				6AC605DC1C7657C60055FE0A /* Launch Screen.storyboard in Resources */,
 				6AF3841217F12EB700B85E87 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +470,7 @@
 				6AF3842F17F12EB700B85E87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6AF3843017F12EB700B85E87 /* Build configuration list for PBXNativeTarget "THSpringyCollectionViewTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +479,7 @@
 				6AF3843217F12EB700B85E87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

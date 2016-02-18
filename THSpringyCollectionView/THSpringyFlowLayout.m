@@ -46,7 +46,7 @@
     CGPoint contentOffset = self.collectionView.contentOffset;
 
     // only refresh the set of UIAttachmentBehaviours if we've moved more than the scroll threshold since last load
-    if (fabsf(contentOffset.y - _lastContentOffset.y) < kScrollRefreshThreshold && _visibleIndexPaths.count > 0){
+    if (fabs(contentOffset.y - _lastContentOffset.y) < kScrollRefreshThreshold && _visibleIndexPaths.count > 0){
         return;
     }
     _lastContentOffset = contentOffset;
@@ -59,12 +59,12 @@
 
     // Remove behaviours that are no longer visible
     [_animator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *behaviour, NSUInteger idx, BOOL *stop) {
-        NSIndexPath *indexPath = [[behaviour.items firstObject] indexPath];
-        
+        NSIndexPath *indexPath = [(UICollectionViewLayoutAttributes *)[[behaviour items] firstObject] indexPath];
+
         BOOL isInVisibleIndexPaths = [indexPathsInVisibleRect member:indexPath] != nil;
         if (!isInVisibleIndexPaths){
             [_animator removeBehavior:behaviour];
-            [_visibleIndexPaths removeObject:[[behaviour.items firstObject] indexPath]];
+            [_visibleIndexPaths removeObject:indexPath];
         }
     }];
 
@@ -92,7 +92,7 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     CGFloat padding = kScrollPaddingRect;
-    rect.size.height += 3*padding;
+    rect.size.height += 3 * padding;
     rect.origin.y -= padding;
     return [_animator itemsInRect:rect];
 }
@@ -119,10 +119,10 @@
 }
 
 - (void)adjustSpring:(UIAttachmentBehavior *)spring centerForTouchPosition:(CGPoint)touchLocation scrollDelta:(CGFloat)scrollDelta {
-    CGFloat distanceFromTouch = fabsf(touchLocation.y - spring.anchorPoint.y);
+    CGFloat distanceFromTouch = fabs(touchLocation.y - spring.anchorPoint.y);
     CGFloat scrollResistance = distanceFromTouch * kScrollResistanceCoefficient;
     
-    UICollectionViewLayoutAttributes *item = [spring.items firstObject];
+    UICollectionViewLayoutAttributes *item = (UICollectionViewLayoutAttributes *)[spring.items firstObject];
     CGPoint center = item.center;
     if (_lastScrollDelta < 0) {
         center.y += MAX(_lastScrollDelta, _lastScrollDelta * scrollResistance);
