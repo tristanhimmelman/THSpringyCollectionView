@@ -78,8 +78,17 @@
     [newVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *attribute, NSUInteger idx, BOOL *stop) {
         UIAttachmentBehavior *spring = [[UIAttachmentBehavior alloc] initWithItem:attribute attachedToAnchor:attribute.center];
         spring.length = 0;
-        spring.frequency = 1.5;
+        spring.frequency = 1;
         spring.damping = 0.6;
+        __weak UIAttachmentBehavior *weakSpring = spring;
+        spring.action = ^(void){
+            CGFloat delta = fabs(attribute.center.y - spring.anchorPoint.y);
+            if (delta <= 1){
+                weakSpring.damping = 100;
+            } else {
+                weakSpring.damping = 0.6;
+            }
+        };
 
         // If our touchLocation is not (0,0), we need to adjust our item's center
         if (_lastScrollDelta != 0) {
